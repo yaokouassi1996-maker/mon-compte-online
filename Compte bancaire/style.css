@@ -1,0 +1,265 @@
+/* style.css - Version Ultra-Professionnelle | Crédit Agricole du Maroc */
+
+:root {
+    --cam-green: #008751;       /* Le vert officiel */
+    --cam-green-dark: #005a36;
+    --cam-red: #ed1c24;         /* Le rouge officiel */
+    --cam-bg: #f4f7f6;          /* Gris bleuté très léger pour le fond */
+    --cam-text: #2d3748;
+    --cam-white: #ffffff;
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+    --transition: all 0.2s ease-in-out;
+}
+
+/* --- Général --- */
+body {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--cam-bg);
+    color: var(--cam-text);
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- Header --- */
+header {
+    background-color: var(--cam-white);
+    padding: 12px 5%;
+    border-bottom: 4px solid var(--cam-green);
+    box-shadow: var(--shadow-sm);
+    z-index: 100;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo-area {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+}
+
+.logo-area h1 {
+    font-size: 1.3em;
+    color: #444;
+    margin: 0;
+    letter-spacing: 1px;
+    font-weight: 800;
+}
+
+.red-bar {
+    width: 45px;
+    height: 5px;
+    background: var(--cam-red);
+    margin: 4px 0;
+}
+
+.tagline {
+    font-size: 0.65em;
+    color: var(--cam-green);
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    margin: 0;
+}
+
+/* --- Login Page (Plus moderne) --- */
+.login-container {
+    background: var(--cam-white);
+    padding: 50px 40px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-md);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    border-top: 6px solid var(--cam-green);
+}
+
+.login-container h2 {
+    font-weight: 300;
+    color: #333;
+    margin-bottom: 35px;
+}
+
+.input-group {
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.85em;
+    font-weight: 600;
+    color: #666;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background: #f8fafc;
+    transition: var(--transition);
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: var(--cam-green);
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(0, 135, 81, 0.1);
+}
+
+button[type="submit"] {
+    width: 100%;
+    padding: 16px;
+    background-color: #004a99; /* Bleu banque classique pour l'action */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: var(--transition);
+}
+
+button[type="submit"]:hover {
+    background-color: #003366;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0, 74, 153, 0.2);
+}
+
+/* --- Dashboard Wrapper --- */
+.dashboard-wrapper {
+    display: flex;
+    max-width: 1240px;
+    margin: 30px auto;
+    gap: 25px;
+    width: 95%;
+}
+
+/* --- Sidebar --- */
+.sidebar {
+    width: 260px;
+    background: var(--cam-white);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    height: fit-content;
+}
+
+.nav-header {
+    background: var(--cam-green);
+    color: white;
+    padding: 18px 20px;
+    font-size: 0.85em;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.nav-menu {
+    list-style: none;
+    padding: 0;
+}
+
+.nav-menu li a {
+    display: block;
+    padding: 15px 20px;
+    text-decoration: none;
+    color: #4a5568;
+    font-size: 0.9em;
+    border-bottom: 1px solid #f1f5f9;
+    transition: var(--transition);
+}
+
+.nav-menu li a:hover {
+    background: #f8fafc;
+    color: var(--cam-green);
+    padding-left: 25px;
+}
+
+.nav-menu li.active a {
+    background: #f0fdf4;
+    color: var(--cam-green);
+    border-left: 5px solid var(--cam-green);
+    font-weight: bold;
+}
+
+/* --- Contenu Dashboard --- */
+.dashboard-content {
+    flex: 1;
+    background: var(--cam-white);
+    border-radius: 12px;
+    padding: 35px;
+    box-shadow: var(--shadow-sm);
+}
+
+/* --- Alertes & Soldes --- */
+.blocage-alert {
+    background: #fff5f5;
+    border: 1px solid #fed7d7;
+    color: var(--cam-red);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.solde-header {
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    border-left: 6px solid var(--cam-green);
+    padding: 30px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.amount {
+    font-size: 2.2em;
+    font-weight: 800;
+    color: #1a202c;
+}
+
+/* --- Tableaux --- */
+.transaction-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 20px;
+}
+
+.transaction-table th {
+    background: #f8fafc;
+    padding: 15px;
+    text-align: left;
+    font-size: 0.75em;
+    text-transform: uppercase;
+    color: #64748b;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.transaction-table td {
+    padding: 15px;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 0.9em;
+}
+
+.transaction-table tr:hover td {
+    background: #fdfdfd;
+}
+
+/* --- Footer --- */
+footer {
+    margin-top: auto;
+    padding: 25px;
+    background: #e2e8f0;
+    color: #64748b;
+    text-align: center;
+    font-size: 0.8em;
+}

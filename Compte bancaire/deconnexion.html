@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Déconnexion Sécurisée - Fidelis Bank</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #333;
+        }
+
+        .loader {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #008751; /* Vert Fidelis Bank */
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0); }
+            100% { transform: rotate(360deg); }
+        }
+
+        h1 { font-size: 1.4em; margin-bottom: 10px; }
+        p { color: #666; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+
+    <div class="loader"></div>
+    <h1>Déconnexion en cours...</h1>
+    <p>Nous fermons votre session sécurisée. Veuillez patienter.</p>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 1. On efface les traces de connexion
+            localStorage.removeItem('fidelisBankLoggedIn');
+            
+            // 2. Petite pause de 1.5 seconde pour simuler un vrai processus de sécurité
+            setTimeout(function() {
+                window.location.href = 'index.html'; 
+            }, 1500);
+        });
+    </script>
+
+</body>
+</html>

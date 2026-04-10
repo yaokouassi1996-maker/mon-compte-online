@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espace Client Sécurisé | Crédit Agricole du Maroc</title> 
+    <style>
+        :root { 
+            --cam-green: #008751; 
+            --cam-red: #ed1c24; 
+            --bg-gray: #f8f9fa;
+        }
+        
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg-gray); margin: 0; }
+        .hidden { display: none !important; }
+        
+        header { 
+            background: #fff; 
+            border-bottom: 4px solid var(--cam-green); 
+            padding: 10px 5%; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* Style pour le lien du logo */
+        .logo-link { text-decoration: none; color: inherit; transition: opacity 0.2s; }
+        .logo-link:hover { opacity: 0.8; }
+
+        .logo-container { display: flex; align-items: center; gap: 10px; }
+        .logo-text { line-height: 1; }
+        .logo-text h1 { margin: 0; font-size: 1.2em; color: #444; text-transform: uppercase; letter-spacing: 1px; }
+        .logo-text p { margin: 0; font-size: 0.7em; color: var(--cam-green); font-weight: bold; letter-spacing: 2px; }
+        .red-bar { width: 40px; height: 6px; background: var(--cam-red); margin-top: 5px; }
+
+        .login-container { max-width: 420px; margin: 80px auto; background: #fff; padding: 40px; border-radius: 4px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); text-align: center; }
+        .login-container h2 { color: #333; margin-bottom: 30px; font-weight: 300; }
+        .input-group { margin-bottom: 20px; text-align: left; }
+        .input-group label { display: block; margin-bottom: 8px; font-size: 0.85em; color: #666; }
+        .input-group input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; font-size: 1em; }
+        
+        button { 
+            width: 100%; 
+            padding: 15px; 
+            background: #094202; 
+            color: white; 
+            border: none; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            font-weight: bold; 
+            font-size: 1em;
+            transition: background 0.3s;
+        }
+        button:hover { background: #003366; }
+
+        .dashboard-wrapper { display: flex; max-width: 1200px; margin: 20px auto; gap: 20px; padding: 20px; }
+        .dashboard-content { flex: 1; background: #fff; padding: 30px; border-radius: 4px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .blocage-alert { background: #fff5f5; color: var(--cam-red); padding: 20px; border: 1px solid #feb2b2; margin-bottom: 25px; border-radius: 4px; }
+
+        .solde-box { display: flex; justify-content: space-between; background: #f1f3f5; padding: 20px; border-radius: 8px; border-left: 5px solid var(--cam-green); }
+        .amount { font-size: 2em; font-weight: bold; color: #2d3748; }
+
+        .error { color: var(--cam-red); font-size: 0.85em; margin-bottom: 15px; min-height: 1.2em; }
+
+        .sidebar { width: 250px; background: #fff; padding: 20px; border-radius: 4px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); height: fit-content; }
+        .sidebar ul { list-style: none; padding: 0; }
+        .sidebar li { padding: 12px 0; border-bottom: 1px solid #eee; }
+        .sidebar a { text-decoration: none; color: #333; font-size: 0.9em; font-weight: 500; }
+        .sidebar a:hover { color: var(--cam-green); }
+    </style>
+</head>
+<body onload="checkNavigation()">
+
+    <header>
+        <a href="https://www.creditagricole.ma/" target="_blank" class="logo-link">
+            <div class="logo-container">
+                <div class="logo-text">
+                    <h1>CREDIT AGRICOLE DU MAROC</h1>
+                    <div class="red-bar"></div>
+                    <p>UN ENGAGEMENT DURABLE</p>
+                </div>
+            </div>
+        </a>
+        <div id="headerLogout" class="hidden">
+            <button onclick="logout()" style="width:auto; padding:8px 15px; background:var(--cam-green);">Déconnexion</button>
+        </div>
+    </header>
+
+    <main>
+        <div id="loginSection" class="login-container">
+            <h2>Accès à vos comptes</h2>
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="input-group">
+                    <label>Identifiant (ID)</label>
+                    <input type="text" id="accountId" placeholder="Entrez votre identifiant" required autocomplete="off">
+                </div>
+                <div class="input-group">
+                    <label>Mot de passe</label>
+                    <input type="password" id="password" placeholder="••••••••" required>
+                </div>
+                <div id="errorMessage" class="error"></div>
+                <button type="submit">SE CONNECTER EN TOUTE SÉCURITÉ</button>
+            </form>
+            <p style="font-size:0.7em; color:#aaa; margin-top:25px;">Protection des données : Vos accès sont cryptés via le protocole SSL Secure.</p>
+        </div>
+
+        <div id="dashboardSection" class="dashboard-wrapper hidden">
+            <nav class="sidebar">
+                <ul>
+                    <li><a href="#" style="color:var(--cam-green);">● RÉSUMÉ DES COMPTES</a></li>
+                    <li><a href="mes-cartes.html">MES CARTES BANCAIRES</a></li>
+                    <li><a href="mes-assurances.html">MES ASSURANCES</a></li>
+                    <li><a href="#" style="color:#ccc; cursor:not-allowed;">VIREMENTS 🔒</a></li>
+                </ul>
+            </nav>
+
+            <div class="dashboard-content">
+                <h2 style="margin-top:0;">Bonjour, Mme GUEGANIC ép.ASCHAUER Daniele Gabrielle Andrée</h2>
+                <p style="color:#666; font-size:0.9em;">N° de Compte : 2544 8796 0084 2000</p>
+
+                <div class="blocage-alert">
+                    <h3 style="margin-top:0;">⚠️ COMPTE SOUS RESTRICTION ADMINISTRATIVE</h3>
+                    <p>En raison d'une procédure de vérification de conformité, l'accès à vos fonds est temporairement suspendu. Les fonctions de virement et de paiement par carte sont désactivées.</p>
+                    <p><strong>Code d'erreur : ERR-SAISIE-3302</strong></p>
+                </div>
+
+                <div class="solde-box">
+                    <div>
+                        <span style="font-size:0.8em; color:#718096; text-transform:uppercase;">Solde Actuel Bloqué</span><br>
+                        <span class="amount">15 260 000 MAD</span>
+                    </div>
+                    <div style="text-align:right;">
+                        <span style="font-size:0.8em; color:#718096; text-transform:uppercase;">Devise</span><br>
+                        <span style="font-weight:bold;">Dirham Marocain (MAD)</span>
+                    </div>
+                </div>
+
+                <div style="margin-top:30px;">
+                    <h3>Derniers mouvements</h3>
+                    <p style="font-size:0.85em; color:#888;">Aucun mouvement autorisé depuis le blocage du compte.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function checkNavigation() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const isDashboard = urlParams.get('view') === 'dashboard';
+            const isLoggedIn = localStorage.getItem('fidelisLoggedIn') === 'true';
+
+            if (isDashboard && isLoggedIn) {
+                showDashboard();
+            }
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            const id = document.getElementById('accountId').value.trim();
+            const pass = document.getElementById('password').value.trim();
+
+            const idValide = "Gabrielle-Andrée008420";
+            const passValide = "Gabrielle-Andrée008420";
+
+            if(id === idValide && pass === passValide) {
+                localStorage.setItem('fidelisLoggedIn', 'true');
+                showDashboard();
+            } else {
+                document.getElementById('errorMessage').innerText = "Erreur d'authentification : Identifiant ou mot de passe incorrect.";
+            }
+        }
+
+        function showDashboard() {
+            document.getElementById('loginSection').classList.add('hidden');
+            document.getElementById('dashboardSection').classList.remove('hidden');
+            document.getElementById('headerLogout').classList.remove('hidden');
+        }
+
+        function logout() {
+            localStorage.removeItem('fidelisLoggedIn');
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

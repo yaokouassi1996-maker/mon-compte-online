@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes Cartes Bancaires | Crédit Agricole du Maroc</title> 
+    <style>
+        :root { 
+            --cam-green: #008751; 
+            --cam-red: #ed1c24; 
+            --bg-gray: #f8f9fa;
+        }
+        
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg-gray); margin: 0; }
+        .hidden { display: none !important; }
+        
+        header { 
+            background: #fff; 
+            border-bottom: 4px solid var(--cam-green); 
+            padding: 10px 5%; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .logo-container { display: flex; align-items: center; gap: 10px; }
+        .logo-text { line-height: 1; }
+        .logo-text h1 { margin: 0; font-size: 1.2em; color: #444; text-transform: uppercase; letter-spacing: 1px; }
+        .logo-text p { margin: 0; font-size: 0.7em; color: var(--cam-green); font-weight: bold; letter-spacing: 2px; }
+        .red-bar { width: 40px; height: 6px; background: var(--cam-red); margin-top: 5px; }
+
+        .dashboard-wrapper { display: flex; max-width: 1200px; margin: 20px auto; gap: 20px; padding: 20px; }
+        
+        .sidebar { width: 250px; background: #fff; padding: 20px; border-radius: 4px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); height: fit-content; }
+        .sidebar ul { list-style: none; padding: 0; }
+        .sidebar li { padding: 12px 0; border-bottom: 1px solid #eee; }
+        .sidebar a { text-decoration: none; color: #333; font-size: 0.9em; font-weight: 500; }
+        .sidebar a:hover, .sidebar a.active { color: var(--cam-green); font-weight: bold; }
+
+        .dashboard-content { flex: 1; background: #fff; padding: 30px; border-radius: 4px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        
+        .blocage-alert { background: #fff5f5; color: var(--cam-red); padding: 20px; border: 1px solid #feb2b2; margin-bottom: 25px; border-radius: 4px; border-left: 5px solid var(--cam-red); }
+
+        .card-item { border: 1px solid #eee; padding: 20px; border-radius: 12px; margin-bottom: 20px; background: linear-gradient(135deg, #fdfdfd 0%, #f1f1f1 100%); position: relative; border-left: 8px solid #ccc; }
+        .card-item h4 { margin-top: 0; color: #333; font-size: 1.1em; }
+        .card-number { font-family: 'Courier New', Courier, monospace; font-size: 1.2em; letter-spacing: 2px; color: #444; margin: 15px 0; }
+        .status-tag { display: inline-block; padding: 5px 12px; border-radius: 4px; font-size: 0.75em; font-weight: bold; background: var(--cam-red); color: white; }
+        
+        footer { text-align: center; padding: 30px; color: #888; font-size: 0.8em; }
+        button.logout-btn { padding: 8px 15px; background: var(--cam-green); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <script>
+        if (localStorage.getItem('fidelisLoggedIn') !== 'true') {
+            window.location.href = 'index.html';
+        }
+    </script>
+
+    <header>
+        <div class="logo-container">
+            <div class="logo-text">
+                <h1>CREDIT AGRICOLE DU MAROC</h1>
+                <div class="red-bar"></div>
+                <p>UN ENGAGEMENT DURABLE</p>
+            </div>
+        </div>
+        <div>
+            <button class="logout-btn" onclick="logout()">Déconnexion</button>
+        </div>
+    </header>
+
+    <main>
+        <div class="dashboard-wrapper">
+            
+            <nav class="sidebar">
+                <ul>
+                    <li><a href="index.html?view=dashboard">RÉSUMÉ DES COMPTES</a></li>
+                    <li><a href="mes-cartes.html" class="active">● MES CARTES BANCAIRES</a></li>
+                    <li><a href="mes-assurances.html">MES ASSURANCES</a></li>
+                    <li><a href="#" style="color:#ccc; cursor:not-allowed;">VIREMENTS 🔒</a></li>
+                </ul>
+            </nav>
+
+            <div class="dashboard-content">
+                <p style="color:#888; font-size: 0.8em; margin-bottom: 10px;">Accueil > Mes cartes</p>
+                <h2 style="margin-top:0;">Gestion de vos Cartes</h2>
+
+                <div class="blocage-alert">
+                    <h3 style="margin-top:0;">⚠️ SERVICES DE PAIEMENT INTERROMPUS</h3>
+                    <p>Conformément à la procédure de saisie conservatoire n°3302-CAM, tous vos moyens de paiement rattachés au compte 2544...2000 ont été désactivés.</p>
+                </div>
+
+                <div class="card-section">
+                    <h3>Vos Cartes de Paiement</h3>
+                    
+                    <div class="card-item">
+                        <span class="status-tag">CARTE BLOQUÉE</span>
+                        <h4>Visa Premier Gold</h4>
+                        <p class="card-number">XXXX XXXX XXXX 4567</p>
+                        <p>Titulaire : <strong>Mme G. ANDREE</strong></p>
+                        <p style="font-size: 0.85em; color: #666;">Plafond mensuel : 50 000 MAD (Indisponible)</p>
+                    </div>
+
+                    <div class="card-item">
+                        <span class="status-tag">CARTE BLOQUÉE</span>
+                        <h4>Mastercard Business</h4>
+                        <p class="card-number">XXXX XXXX XXXX 8901</p>
+                        <p>Titulaire : <strong>Utilisateur Secondaire</strong></p>
+                        <p style="font-size: 0.85em; color: #666;">Usage : Professionnel</p>
+                    </div>
+                    
+                    <div style="margin-top: 30px; background: #fffbe6; border: 1px solid #ffe58f; padding: 15px; border-radius: 4px;">
+                        <p style="color: #856404; font-size: 0.85em; margin: 0;">
+                            <strong>Note :</strong> Toute tentative d'utilisation de ces cartes en distributeur automatique peut entraîner la capture physique de la carte par l'automate pour des raisons de sécurité.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; © 2019 Groupe Crédit Agricole du Maroc. Tous droits réservés. <br> Régulation par Bank Al-Maghrib.</p>
+    </footer>
+
+    <script>
+        function logout() {
+            localStorage.removeItem('fidelisLoggedIn');
+            window.location.href = 'index.html';
+        }
+    </script>
+
+</body>
+</html>
