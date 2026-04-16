@@ -3,75 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Espace Client Sécurisé | Crédit Agricole du Maroc</title> 
+    <title>Crédit Agricole du Maroc | Espace Client Sécurisé</title> 
     <style>
         :root { 
             --cam-green: #008751; 
             --cam-red: #ed1c24; 
-            --bg-gray: #f4f7f6;
-            --text-dark: #2d3748;
+            --cam-blue: #004a99;
+            --bg-gray: #f0f2f5;
+            --text-dark: #1a202c;
+            --white: #ffffff;
         }
         
-        body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg-gray); margin: 0; color: var(--text-dark); }
+        body { font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background: var(--bg-gray); margin: 0; color: var(--text-dark); }
         .hidden { display: none !important; }
         
-        /* HEADER RESPONSIVE */
+        /* HEADER */
         header { 
-            background: #fff; border-bottom: 4px solid var(--cam-green); 
-            padding: 10px 5%; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            background: var(--white); border-bottom: 4px solid var(--cam-green); 
+            padding: 10px 5%; display: flex; justify-content: space-between; align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08); position: sticky; top: 0; z-index: 100;
         }
-
-        .logo-text h1 { margin: 0; font-size: 1em; color: #444; text-transform: uppercase; }
+        .logo-text h1 { margin: 0; font-size: 1.1em; color: #333; letter-spacing: 1px; }
+        .red-bar { width: 35px; height: 5px; background: var(--cam-red); margin: 3px 0; }
         .logo-text p { margin: 0; font-size: 0.65em; color: var(--cam-green); font-weight: bold; }
 
-        /* LOGIN SECTION */
-        .login-container { width: 90%; max-width: 400px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); text-align: center; }
-        .input-group { margin-bottom: 20px; text-align: left; }
-        .input-group label { display: block; margin-bottom: 8px; font-size: 0.85em; font-weight: 600; }
-        .input-group input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; font-size: 16px; /* Évite le zoom auto sur iPhone */ }
+        /* LOGIN */
+        .login-container { max-width: 380px; margin: 60px auto; background: var(--white); padding: 35px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; }
+        .input-group { margin-bottom: 15px; text-align: left; }
+        .input-group label { display: block; margin-bottom: 5px; font-size: 0.85em; font-weight: 600; color: #4a5568; }
+        .input-group input { width: 100%; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px; box-sizing: border-box; font-size: 16px; }
         
-        button { width: 100%; padding: 15px; background: #004a99; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+        button { width: 100%; padding: 14px; background: var(--cam-blue); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 1em; transition: 0.3s; }
+        button:hover { background: #003366; transform: translateY(-1px); }
 
-        /* LAYOUT RESPONSIVE */
-        .dashboard-wrapper { 
-            display: flex; flex-direction: row; /* Horizontal par défaut (PC) */
-            max-width: 1200px; margin: 20px auto; gap: 20px; padding: 0 15px; 
-        }
-
-        .sidebar { width: 250px; background: #fff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); height: fit-content; }
+        /* LAYOUT DASHBOARD */
+        .dashboard-wrapper { display: flex; max-width: 1200px; margin: 25px auto; gap: 20px; padding: 0 15px; }
+        
+        /* SIDEBAR */
+        .sidebar { width: 260px; background: var(--white); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); height: fit-content; overflow: hidden; }
         .sidebar ul { list-style: none; padding: 0; margin: 0; }
-        .sidebar li a { display: block; padding: 15px 20px; text-decoration: none; color: #333; border-bottom: 1px solid #eee; }
+        .sidebar li a { display: block; padding: 14px 20px; text-decoration: none; color: #4a5568; border-bottom: 1px solid #f7fafc; transition: 0.2s; cursor: pointer; font-size: 0.9em; }
+        .sidebar li a:hover, .sidebar li a.active { background: #f0fdf4; color: var(--cam-green); border-left: 4px solid var(--cam-green); font-weight: bold; }
 
-        .dashboard-content { flex: 1; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-
-        /* INFO BAR & BADGE */
-        .info-bar { display: flex; flex-direction: row; justify-content: space-between; margin-bottom: 20px; }
-        .timestamp-badge { font-size: 0.75em; background: #edf2f7; padding: 10px; border-radius: 6px; border: 1px solid #cbd5e0; text-align: right; min-width: 140px; }
-
-        .blocage-alert { background: #fff5f5; color: var(--cam-red); padding: 15px; border: 1px solid #feb2b2; border-radius: 6px; margin-bottom: 20px; font-size: 0.9em; }
+        /* CONTENT */
+        .dashboard-content { flex: 1; }
+        .card { background: var(--white); padding: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 20px; }
         
-        .solde-box { display: flex; justify-content: space-between; align-items: center; background: #f0fdf4; padding: 20px; border-radius: 8px; border-left: 6px solid var(--cam-green); }
-        .amount { font-size: 1.8em; font-weight: bold; }
+        .welcome-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .user-name { font-size: 1.4em; font-weight: bold; color: var(--cam-blue); margin: 0; }
+        
+        /* SOLDE BOX */
+        .solde-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px; }
+        .solde-card { background: linear-gradient(135deg, #008751 0%, #005e38 100%); color: white; padding: 20px; border-radius: 12px; }
+        .solde-card.blue { background: linear-gradient(135deg, #004a99 0%, #003366 100%); }
+        .solde-label { font-size: 0.8em; opacity: 0.9; text-transform: uppercase; }
+        .solde-val { font-size: 1.8em; font-weight: bold; display: block; margin-top: 5px; }
 
-        /* 📱 MOBILE & TABLETTE ADAPTATION */
-        @media (max-width: 768px) {
-            .dashboard-wrapper { flex-direction: column; } /* On empile Sidebar et Contenu */
-            .sidebar { width: 100%; }
-            .sidebar ul { display: flex; flex-wrap: wrap; }
-            .sidebar li { flex: 1 1 50%; } /* Deux éléments par ligne sur mobile */
-            .sidebar li a { font-size: 0.8em; text-align: center; padding: 10px; }
+        /* INFOS COMPTE */
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; font-size: 0.85em; }
+        .info-item { padding: 10px; border-bottom: 1px solid #edf2f7; }
+        .info-label { color: #718096; display: block; }
+        .info-value { font-weight: 600; color: #2d3748; }
 
-            .info-bar { flex-direction: column; gap: 15px; }
-            .timestamp-badge { text-align: left; width: fit-content; }
-            
-            .amount { font-size: 1.5em; }
-            header { justify-content: center; text-align: center; gap: 10px; }
-        }
+        /* TABLEAU OPERATIONS */
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 0.9em; }
+        th { text-align: left; padding: 12px; color: #718096; font-weight: 600; border-bottom: 2px solid #edf2f7; }
+        td { padding: 12px; border-bottom: 1px solid #edf2f7; }
+        .amt-pos { color: var(--cam-green); font-weight: bold; }
+        .amt-neg { color: var(--cam-red); font-weight: bold; }
 
-        @media (max-width: 480px) {
-            .sidebar li { flex: 1 1 100%; } /* Une seule ligne par menu sur très petit écran */
-            .solde-box { flex-direction: column; text-align: center; gap: 10px; }
+        /* CARTES */
+        .bank-card { width: 300px; height: 180px; background: #2d3748; border-radius: 12px; padding: 20px; color: white; position: relative; box-shadow: 0 10px 15px rgba(0,0,0,0.2); }
+        .card-chip { width: 40px; height: 30px; background: #ecc94b; border-radius: 4px; margin-bottom: 20px; }
+        .card-num { font-size: 1.2em; letter-spacing: 2px; }
+
+        /* --- AJOUT POUR LE PDF --- */
+        @media print {
+            body * { visibility: hidden; }
+            #pdf-template, #pdf-template * { visibility: visible; }
+            #pdf-template { position: absolute; left: 0; top: 0; width: 100%; display: block !important; }
         }
     </style>
 </head>
@@ -81,91 +91,244 @@
         <div class="logo-container">
             <div class="logo-text">
                 <h1>CREDIT AGRICOLE DU MAROC</h1>
+                <div class="red-bar"></div>
                 <p>UN ENGAGEMENT DURABLE</p>
             </div>
         </div>
         <div id="headerLogout" class="hidden">
-            <button onclick="logout()" style="width:auto; padding:8px 15px; background:var(--cam-green); font-size: 0.8em;">Déconnexion</button>
+            <span id="userNameHeader" style="margin-right: 15px; font-size: 0.9em; font-weight: 600;"></span>
+            <button onclick="logout()" style="width:auto; padding:8px 15px; background:var(--cam-red); font-size: 0.8em;">Quitter</button>
         </div>
     </header>
 
     <main>
         <div id="loginSection" class="login-container">
-            <h2>Accès à vos comptes</h2>
+            <img src="https://img.icons8.com/ios-filled/50/008751/safe-ok.png" alt="security" style="margin-bottom: 10px;">
+            <h2 style="margin-top:0;">Espace Sécurisé</h2>
+            <p style="font-size: 0.8em; color: #666; margin-bottom: 25px;">Accédez à la gestion de vos comptes en toute confidentialité.</p>
             <form onsubmit="handleLogin(event)">
                 <div class="input-group">
-                    <label>Identifiant personnel</label>
-                    <input type="text" id="accountId" placeholder="Votre ID" required>
+                    <label>Identifiant (ID)</label>
+                    <input type="text" id="accountId" placeholder="Numéro d'utilisateur" required>
                 </div>
                 <div class="input-group">
                     <label>Code secret</label>
-                    <input type="password" id="password" placeholder="••••••••" required>
+                    <input type="password" id="password" placeholder="Mot de passe" required>
                 </div>
                 <div id="errorMessage" style="color:red; font-size:0.8em; margin-bottom:10px;"></div>
-                <button type="submit">SE CONNECTER</button>
+                <button type="submit">S'IDENTIFIER</button>
             </form>
         </div>
 
         <div id="dashboardSection" class="dashboard-wrapper hidden">
             <nav class="sidebar">
                 <ul>
-                    <li><a href="index.html" style="font-weight:bold; color:var(--cam-green); background:#f0fdf4;">SYNTHÈSE</a></li>
-                    <li><a href="mes-cartes.html">MES CARTES</a></li>
-                    <li><a href="mes-assurances.html">ASSURANCES</a></li>
-                    <li><a href="#" style="color:#ccc;">VIREMENTS 🔒</a></li>
+                    <li><a onclick="switchTab('synthese')" id="tab-synthese" class="active">🏠 Synthèse Générale</a></li>
+                    <li><a onclick="switchTab('virement')" id="tab-virement">💸 Effectuer un Virement</a></li>
+                    <li><a onclick="switchTab('cartes')" id="tab-cartes">💳 Mes Cartes Bancaires</a></li>
+                    <li><a onclick="switchTab('documents')" id="tab-documents">📄 Relevés & Documents</a></li>
+                    <li><a href="#">📱 Services Mobiles</a></li>
+                    <li><a href="#">⚙️ Paramètres Sécurité</a></li>
                 </ul>
+                <div style="padding: 20px; background: #f7fafc; font-size: 0.75em; color: #718096;">
+                    <strong>Votre conseiller :</strong><br>
+                    Mme. Abid lissa<br>
+                    Agence Casa Derb Omar → Avenue Mohammed VI
+                </div>
             </nav>
 
             <div class="dashboard-content">
-                <div class="info-bar">
+                <div class="welcome-header">
                     <div>
-                        <h3 style="margin:0; font-size: 1.1em;">Bonjour,</h3>
-                        <p style="margin:5px 0; font-weight: bold; color:#444;">Mme GUEGANIC ép.ASCHAUER Daniele Gabrielle Andrée</p>
-                        <p style="color:#718096; font-size:0.8em; margin:0;">Compte Chèques n° 2544...2000</p>
+                        <p style="margin:0; color:#718096;">Heureux de vous revoir,</p>
+                        <h2 class="user-name">Mme GUEGANIC Daniele Gabrielle</h2>
                     </div>
-                    <div class="timestamp-badge">
-                        <strong>Dernière connexion :</strong><br>
-                        <span id="connectionDisplay">Chargement...</span>
+                    <div style="text-align: right; font-size: 0.75em; color: #718096;">
+                        IP: 197.214.**.** (Sécurisé)<br>
+                        Dernière connexion: <span id="lastConn"></span>
                     </div>
                 </div>
 
-                <div class="blocage-alert">
-                    <strong>⚠️ RESTRICTION ADMINISTRATIVE</strong><br>
-                    Accès aux fonds suspendu pour vérification.
+                <div id="content-synthese">
+                    <div class="solde-container">
+                        <div class="solde-card">
+                            <span class="solde-label">Solde Actuel</span>
+                            <span class="solde-val">15 260 000,00 MAD</span>
+                        </div>
+                        <div class="solde-card blue">
+                            <span class="solde-label">Solde Disponible</span>
+                            <span class="solde-val">15 248 500,00 MAD</span>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="margin-top:0; border-bottom: 1px solid #eee; padding-bottom: 10px;">Informations du Compte</h3>
+                        <div class="info-grid">
+                            <div class="info-item"><span class="info-label">Numéro de compte</span><span class="info-value">2544 8796 0084 2000</span></div>
+                            <div class="info-item"><span class="info-label">RIB</span><span class="info-value">013 780 0000254487960084 20</span></div>
+                            <div class="info-item"><span class="info-label">IBAN</span><span class="info-value">MA64 0137 8000 0025 4487 9600 8420</span></div>
+                            <div class="info-item"><span class="info-label">Code SWIFT / BIC</span><span class="info-value">CRAGMAMC</span></div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="margin-top:0;">Dernières Opérations</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Libellé</th>
+                                    <th style="text-align:right">Montant (MAD)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="opeTable">
+                                <tr><td>15/04/2026</td><td>REVERSEMENT DIVIDENDES</td><td class="amt-pos" style="text-align:right">+ 45 000,00</td></tr>
+                                <tr><td>14/04/2026</td><td>PRLV MAROC TELECOM</td><td class="amt-neg" style="text-align:right">- 450,00</td></tr>
+                                <tr><td>12/04/2026</td><td>RECHARGE MOBILE</td><td class="amt-neg" style="text-align:right">- 200,00</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
-                <div class="solde-box">
-                    <div>
-                        <span style="font-size:0.7em; text-transform:uppercase;">Solde Actuel Bloqué</span><br>
-                        <span class="amount">15 260 000,00</span>
+                <div id="content-virement" class="hidden">
+                    <div class="card">
+                        <h3>Nouveau Virement National / International</h3>
+                        <div class="input-group">
+                            <label>Bénéficiaire</label>
+                            <select style="width:100%; padding:10px; border-radius:8px; border:1px solid #ddd;">
+                                <option>Sélectionnez un bénéficiaire</option>
+                                <option>SOCIETE GENERALE - MAROC (RIB: 022...)</option>
+                                <option>BMCE BANK - (RIB: 011...)</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>Montant (MAD)</label>
+                            <input type="number" id="virementAmt" placeholder="0.00">
+                        </div>
+                        <button onclick="validerVirement()" style="background:var(--cam-green);">ENVOYER LE VIREMENT</button>
                     </div>
-                    <div style="text-align:right;">
-                        <span style="font-size:0.7em; text-transform:uppercase;">Devise</span><br>
-                        <span style="font-weight:bold;">MAD</span>
+                </div>
+
+                <div id="content-cartes" class="hidden">
+                    <div class="card">
+                        <h3>Mes Cartes Bancaires</h3>
+                        <div style="display: flex; gap: 20px; align-items: center;">
+                            <div class="bank-card">
+                                <div style="display:flex; justify-content: space-between;">
+                                    <span style="font-style: italic;">VISA GOLD</span>
+                                    <span style="font-weight:bold;">CAM</span>
+                                </div>
+                                <div class="card-chip"></div>
+                                <div class="card-num">**** **** **** 8824</div>
+                                <div style="margin-top: 15px; font-size: 0.8em; display:flex; justify-content: space-between;">
+                                    <span>GUEGANIC DANIELE</span>
+                                    <span>EXP: 09/28</span>
+                                </div>
+                            </div>
+                            <p><strong>Statut :</strong> <span style="color:var(--cam-green); font-weight:bold;">ACTIVE</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="content-documents" class="hidden">
+                    <div class="card">
+                        <h3>Mes Documents & Relevés</h3>
+                        <div class="info-item">📄 Relevé de compte - Mars 2026 <a href="#" onclick="imprimerPDF('Relevé de Compte - Mars 2026')" style="float:right; color:var(--cam-blue); font-weight:bold;">PDF / Imprimer</a></div>
+                        <div class="info-item">📄 Attestation de RIB / IBAN <a href="#" onclick="imprimerPDF('Attestation de RIB / IBAN')" style="float:right; color:var(--cam-blue); font-weight:bold;">PDF / Imprimer</a></div>
                     </div>
                 </div>
             </div>
         </div>
     </main>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            if (localStorage.getItem('isLoggedIn') === 'true') { showDashboard(); }
-        });
+    <div id="pdf-template" class="hidden" style="padding: 40px; background: white; color: black; font-family: Arial, sans-serif;">
+        <div style="display: flex; justify-content: space-between; border-bottom: 2px solid #008751; padding-bottom: 20px; margin-bottom: 30px;">
+            <div>
+                <h1 style="color: #004a99; margin: 0; font-size: 24px;">CRÉDIT AGRICOLE DU MAROC</h1>
+                <p style="font-size: 10px; color: #666; margin: 5px 0;">Siège social : Place des Alaouites, Rabat, Maroc<br>RC 12345 - ICE 00987654321</p>
+            </div>
+            <div style="text-align: right; font-size: 12px; line-height: 1.4;">
+                <strong>Mme GUEGANIC Daniele Gabrielle</strong><br>
+                Résidence Al Mansour, Appt 12<br>
+                Casablanca, MAROC
+            </div>
+        </div>
 
+        <h2 id="pdf-title" style="text-align: center; text-transform: uppercase; font-size: 18px; margin-bottom: 30px; border: 1px solid #ccc; padding: 10px; background: #f9f9f9;"></h2>
+        
+        <div style="margin-bottom: 25px; font-size: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div>
+                <p><strong>N° de compte :</strong> 2544 8796 0084 2000</p>
+                <p><strong>IBAN :</strong> MA64 2257 8000 9914 7136 5101 2668</p> 
+            </div>
+            <div style="text-align: right;">
+                <p><strong>Date d'édition :</strong> <span id="pdf-date"></span></p>
+                <p><strong>Devise :</strong> MAD</p>
+            </div>
+        </div>
+
+        <table style="width: 100%; border-collapse: collapse; font-size: 11px;">
+            <thead>
+                <tr style="background: #008751; color: white;">
+                    <th style="border: 1px solid #ddd; padding: 10px;">Date Opé.</th>
+                    <th style="border: 1px solid #ddd; padding: 10px;">Date Val.</th>
+                    <th style="border: 1px solid #ddd; padding: 10px;">Libellé de l'opération</th>
+                    <th style="border: 1px solid #ddd; padding: 10px; text-align: right;">Débit</th>
+                    <th style="border: 1px solid #ddd; padding: 10px; text-align: right;">Crédit</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 8px;">15/04/2026</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">15/04/2026</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">REVERSEMENT DIVIDENDES</td>
+                    <td style="border: 1px solid #ddd; padding: 8px; text-align: right;"></td>
+                    <td style="border: 1px solid #ddd; padding: 8px; text-align: right; font-weight:bold;">+ 45 000,00</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 8px;">14/04/2026</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">14/04/2026</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">PRLV MAROC TELECOM</td>
+                    <td style="border: 1px solid #ddd; padding: 8px; text-align: right; color: #ed1c24;">- 450,00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px; text-align: right;"></td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 8px;">12/04/2026</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">12/04/2026</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">RECHARGE MOBILE</td>
+                    <td style="border: 1px solid #ddd; padding: 8px; text-align: right; color: #ed1c24;">- 200,00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px; text-align: right;"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div style="margin-top: 30px; text-align: right; font-size: 14px; font-weight: bold; background: #e8f5e9; padding: 15px; border: 1px solid #008751;">
+            NOUVEAU SOLDE AU 16/04/2026 : 15 260 000,00 MAD
+        </div>
+
+        <div style="margin-top: 60px; text-align: center; font-size: 9px; color: #999; border-top: 1px solid #eee; padding-top: 20px;">
+            Crédit Agricole du Maroc - Société Anonyme au Capital de 10.000.000.000 MAD.<br>
+            Ce document électronique est certifié conforme et vaut original pour toutes fins utiles.<br>
+            En cas de contestation, veuillez contacter votre conseiller sous 30 jours.
+        </div>
+    </div>
+
+    <script>
         function handleLogin(event) {
             event.preventDefault();
             const id = document.getElementById('accountId').value.trim();
             const pass = document.getElementById('password').value.trim();
 
-            if(id === "Gabrielle-Andrée008420" && pass === "Gabrielle-Andrée008420") {
-                const maintenant = new Date();
-                const fullTimestamp = "Le " + maintenant.toLocaleDateString('fr-FR') + " à " + maintenant.getHours().toString().padStart(2, '0') + ":" + maintenant.getMinutes().toString().padStart(2, '0');
-                localStorage.setItem('isLoggedIn', 'true');
-                localStorage.setItem('loginTime', fullTimestamp);
+            const userValid = "ADMIN-CAM-2026";
+            const passValid = "Securite@2026";
+
+            if(id === userValid && pass === passValid) {
+                localStorage.setItem('bank_logged', 'true');
+                localStorage.setItem('bank_time', new Date().toLocaleString());
                 showDashboard();
+                document.getElementById('errorMessage').innerText = "";
             } else {
-                document.getElementById('errorMessage').innerText = "Identifiant ou mot de passe incorrect.";
+                document.getElementById('errorMessage').innerText = "Identifiants invalides ou accès restreint.";
             }
         }
 
@@ -173,14 +336,42 @@
             document.getElementById('loginSection').classList.add('hidden');
             document.getElementById('dashboardSection').classList.remove('hidden');
             document.getElementById('headerLogout').classList.remove('hidden');
-            const savedTime = localStorage.getItem('loginTime');
-            if (savedTime) document.getElementById('connectionDisplay').innerText = savedTime;
+            document.getElementById('lastConn').innerText = localStorage.getItem('bank_time');
+            document.getElementById('userNameHeader').innerText = "Mme GUEGANIC D.";
+        }
+
+        function switchTab(tab) {
+            const tabs = ['synthese', 'virement', 'cartes', 'documents'];
+            tabs.forEach(t => {
+                document.getElementById('content-' + t).classList.add('hidden');
+                document.getElementById('tab-' + t).classList.remove('active');
+            });
+            document.getElementById('content-' + tab).classList.remove('hidden');
+            document.getElementById('tab-' + tab).classList.add('active');
+        }
+
+        function validerVirement() {
+            const amt = document.getElementById('virementAmt').value;
+            if(!amt) return alert("Saisissez un montant.");
+            const table = document.getElementById('opeTable');
+            const row = table.insertRow(0);
+            row.innerHTML = `<td>${new Date().toLocaleDateString()}</td><td>VIREMENT EN COURS</td><td class="amt-neg" style="text-align:right">- ${amt},00</td>`;
+            alert("Virement transmis.");
+            switchTab('synthese');
+        }
+
+        function imprimerPDF(titre) {
+            document.getElementById('pdf-title').innerText = titre;
+            document.getElementById('pdf-date').innerText = new Date().toLocaleDateString();
+            window.print();
         }
 
         function logout() {
             localStorage.clear();
             window.location.reload();
         }
+
+        if(localStorage.getItem('bank_logged')) showDashboard();
     </script>
 </body>
 </html>
